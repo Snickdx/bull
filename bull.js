@@ -1,4 +1,15 @@
 module.exports = class Bull{
+    
+    genRand(){
+        let reg = /^(?!.*(.).*\1)\d{4}$/;
+        let val;
+        while(!reg.test(val)){
+            val = Math.floor((Math.random() * 9876) + 123);
+            if(val < 1000) val = "0"+val;
+            else val = val+"";
+        }
+        return val;
+    }
 
     calc(num1, num2){
         if (!Array.isArray(num1) || !Array.isArray(num2)) throw "non array parameters exception";
@@ -17,7 +28,7 @@ module.exports = class Bull{
         return count;
     }
 
-    constructor(playerNumber1, playerNumber2){
+    constructor(playerNumber1, playerNumber2= this.genRand()+""){
         this.playerNumber1 = playerNumber1.split('');
         this.playerNumber2 = playerNumber2.split('');
     }
